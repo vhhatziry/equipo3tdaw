@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro al Programa de Tutorías - ESCOM</title>
+    <!-- Enlace a los estilos CSS de Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link a font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+    <!-- Enlace a la hoja de estilos personalizada -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="d-flex">
+            <a class="navbar-brand" href="https://www.ipn.mx/" target="_blank">
+                <img src="resources/img/logo_ipn.png" alt="IPN" style="height: 60px;" class="d-inline-block align-top">
+            </a>
+            <a class="navbar-brand" href="https://www.escom.ipn.mx/" target="_blank">
+                <img src="resources/img/logo_escom.png" alt="ESCOM" style="height: 60px;" class="d-inline-block align-top">
+            </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="registro.html">Registro</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="sesion.html">Descargar PDF</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="php/admin.php">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Pedir credenciales para descargar el PDF, cooreo institucional y contrasenia -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center">
+                        <legend>Descargar PDF</legend>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center pls">Por favor ingrese sus credenciales para descargar el PDF con los datos de su registro.</p>
+                        <form method="post" action="php/descargarPDF.php" class="form" id="formDescargarPDF" target="_blank">
+                            <div class="form-group">
+                                <label for="boleta">Boleta</label>
+                                <input type="text" class="form-control" id="boleta" name="boleta" placeholder="Ingrese su boleta" autocomplete="off" oninput="validarBoleta('boleta')" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="correo_institucional">Correo institucional</label>
+                                <input type="email" class="form-control" id="correo_institucional" name="correo_institucional" placeholder="Ingrese su correo institucional" autocomplete="off" oninput="validarCorreo('correo_institucional')" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contrasena">Contraseña</label>
+                                <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" autocomplete="new-password" oninput="validarContra('contrasena')" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Descargar PDF</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+                                
+    <script src="js/sesion.js"></script>
+</body>

@@ -1,0 +1,61 @@
+
+.card {
+    margin-top: 1rem;
+}
+.navbar {
+    padding: 1rem 1rem;
+}
+
+.navbar-brand img {
+    height: 40px;
+    margin-left: 2rem;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+}
+
+.w-auto{
+    color:rgb(20, 125, 186);
+}
+
+.rpt{
+    font-weight: bolder;
+}
+
+.rgt{
+    background-color:  rgb(15, 91, 136);
+}
+
+p{
+    text-align: justify;
+}
+
+body{
+    background-color: rgba(207, 219, 227, 0.300);
+}
+
+legend{
+    font-weight: bold;
+}
+
+.pls{
+    font-weight: bold;
+    font-style: oblique;
+    color: rgb(138, 78, 109);
+}
+
+fieldset{
+    border: 4px solid rgb(138, 78, 109);
+}
+
+@media screen and (max-width: 768px) {
+    td {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .cell-content {
+      margin-bottom: 1em;
+    }
+}

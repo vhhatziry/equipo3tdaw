@@ -1,0 +1,76 @@
+
+.card {
+    margin-top: 1rem;
+}
+.navbar {
+    padding: 1rem 1rem;
+}
+
+.navbar-brand img {
+    height: 40px;
+    margin-left: 2rem;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+}
+
+.w-auto{
+    color:rgb(20, 125, 186);
+}
+
+.rpt{
+    font-weight: bolder;
+}
+
+.rgt{
+    background-color:  rgb(15, 91, 136);
+}
+
+p{
+    text-align: justify;
+}
+
+body{
+    background-color: rgba(207, 219, 227, 0.300);
+}
+
+legend{
+    font-weight: bold;
+}
+
+.pls{
+    font-weight: bold;
+    font-style: oblique;
+    color: rgb(138, 78, 109);
+}
+
+fieldset{
+    border: 4px solid rgb(138, 78, 109);
+}
+
+@media screen and (max-width: 768px) {
+    td {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .cell-content {
+      margin-bottom: 1em;
+    }
+}
+
+.card-img-bottom {
+    transition: transform .2s; /* Animación */
+    display: block; /* Asegura que la imagen se muestre como bloque */
+    margin-left: auto; /* Centra la imagen horizontalmente */
+    margin-right: auto; /* Centra la imagen horizontalmente */
+}
+
+.card-img-bottom:hover {
+    transform: scale(1.09); /* Escala la imagen al pasar el mouse */
+}
+
+.card-body:hover {
+    background-color: #f8f9fa; /* Cambia el fondo al pasar el mouse sobre el texto */
+}

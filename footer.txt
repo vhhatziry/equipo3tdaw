@@ -1,0 +1,66 @@
+<footer id="footer" style="background-color:#EAEAEA !important; margin-top: 50px;" class="pt-5">
+        <div id="pie">
+            <!-- First Section -->
+            <div class="footer-widgets-wrap py-5" style="background-color: #333333;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img src="imgs/logoSEP.png" alt="Logo de la SEP" style="max-width: 100%; height: auto;" class="mb-4"><br>
+                            <a href="https://www.gob.mx/sep" style="color:#FFF !important;" title="SEP">www.gob.mx/SEP/</a>
+                        </div>
+                        <div class="col-md-8 text-center">
+                            <h4 style="color:#FFF !important; font-size: 1em;">
+                                INSTITUTO POLITÉCNICO NACIONAL<br>
+                                D.R. Instituto Politécnico Nacional (IPN). Av. Luis Enrique Erro S/N, Unidad Profesional Adolfo López Mateos, Zacatenco, Delegación Gustavo A. Madero, C.P. 07738, Ciudad de México 2009-2013.<br><br>
+                                Esta página es una obra intelectual protegida por la Ley Federal del Derecho de Autor, puede ser reproducida con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica; su uso para otros fines, requiere autorización previa y por escrito de la Dirección General del Instituto.
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Second Section -->
+            <div class="footer-widgets-wrap py-5" style="background-color: #13322B;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <img src="imgs/gobmxlogo_2x.png" alt="Logo del Gobierno de México" style="max-width: 100%; height: auto;" class="mb-4">
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 style="color:#FFF !important;">Enlaces</h4>
+                            <p>
+                                <a href="https://participa.gob.mx/" title="Participa" style="color:#CDCDCD;">Participa</a><br>
+                                <a href="https://www.gob.mx/publicaciones" title="Publicaciones Oficiales" style="color:#CDCDCD;">Publicaciones Oficiales</a><br>
+                                <a href="http://www.ordenjuridico.gob.mx/" title="Marco Jurídico" style="color:#CDCDCD;">Marco Jurídico</a><br>
+                                <a href="https://consultapublicamx.inai.org.mx/vut-web/" title="Plataforma Nacional de Transparencia" style="color:#CDCDCD;">Plataforma Nacional de Transparencia</a><br>
+                                <a href="https://alertadores.funcionpublica.gob.mx/" title="Alerta" style="color:#CDCDCD;">Alerta</a><br>
+                                <a href="https://sidec.funcionpublica.gob.mx/" title="Denuncia" style="color:#CDCDCD;">Denuncia</a>
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 style="color:#FFF !important;">¿Qué es gob.mx?</h4>
+                            <p style="color:#FFF !important;">
+                                Es el portal único de trámites, información y participación ciudadana 
+                                <span><a href="https://www.gob.mx/que-es-gobmx" title="Portal único de trámites" style="color:#CDCDCD;">Leer más</a></span><br><br>
+                                <a href="https://datos.gob.mx/" title="Portal de datos abiertos" style="color:#CDCDCD;">Portal de datos abiertos</a><br>
+                                <a href="https://www.gob.mx/accesibilidad" title="Declaración de accesibilidad" style="color:#CDCDCD;">Declaración de accesibilidad</a><br>
+                                <a href="https://www.gob.mx/privacidadintegral" title="Aviso de privacidad integral" style="color:#CDCDCD;">Aviso de privacidad integral</a><br>
+                                <a href="https://www.gob.mx/privacidadsimplificado" title="Aviso de privacidad simplificado" style="color:#CDCDCD;">Aviso de privacidad simplificado</a><br>
+                                <a href="https://www.gob.mx/terminos" title="Términos y condiciones" style="color:#CDCDCD;">Términos y condiciones</a><br>
+                                <a href="https://www.gob.mx/terminos#medidas-seguridad-informacion" title="Política de seguridad" style="color:#CDCDCD;">Política de seguridad</a><br>
+                                <a href="https://www.gob.mx/sitemap" title="Mapa de sitio" style="color:#CDCDCD;">Mapa de sitio</a><br>
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <a href="https://www.gob.mx/tramites/ficha/presentacion-de-quejas-y-denuncias-en-la-sfp/SFP54" title="Denuncia contra servidores" style="color:#CDCDCD;">Denuncia contra servidores públicos</a>
+                            <p></p>
+                            <h4 style="color:#FFF !important;">Síguenos en:</h4>
+                            <p>
+                                <a href="https://www.facebook.com/gobmexico" style="color:#CDCDCD;"><i class="fab fa-facebook-f fa-2x"></i></a>&nbsp;<br>
+                                <a href="https://twitter.com/GobiernoMX" style="color:#CDCDCD;"><i class="fab fa-twitter fa-2x"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>

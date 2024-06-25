@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - ESCOM</title>
+    <!-- Enlace a los estilos CSS de Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a la hoja de estilos personalizada -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="https://www.escom.ipn.mx/" target="_blank">
+            <img src="resources/img/logo_escom.png" alt="ESCOM" height="30" class="d-inline-block align-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="registro.html">Registro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sesion.html">Descargar PDF</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="cradmin.html">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center">
+                        <legend>Inicio de sesión (Administrador)</legend>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center pls">Por favor ingrese sus credenciales para iniciar sesión.</p>
+                        <form method="post" action="php/sesion.php" onsubmit="return validateAdminForm()">
+                            <div class="form-group">
+                                <label for="adminUsername">Nombre de usuario</label>
+                                <input type="text" class="form-control" id="adminUsername" name="adminUsername" placeholder="Ingrese su nombre de usuario" autocomplete="off" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="adminPassword">Contraseña</label>
+                                <input type="password" class="form-control" id="adminPassword" name="adminPassword" placeholder="Ingrese su contraseña" autocomplete="new-password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de Bootstrap y jQuery -->
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Script de validación con JavaScript -->
+    <script src="js/validation.js"></script>
+</body>
+</html>

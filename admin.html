@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <style>
+        .contenedor {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+    </style>
+    <link rel="icon" href="resources/icons/icono.ico" type="image/icon type">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="https://www.ipn.mx/" target="_blank">
+            <img src="resources/img/logoIPN2x.png" alt="IPN" style="height: 70px; margin-left: -0.5rem;" class="d-inline-block align-top">
+        </a>
+        <a class="navbar-brand" href="https://www.escom.ipn.mx/" target="_blank">
+            <img src="resources/img/logoESCOM2x.png" alt="ESCOM" style="height: 70px;  margin-left: -2rem;" class="d-inline-block align-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto"> <!-- Utilizando ml-auto para alinear a la derecha -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="registro.html">Registro</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="sesion.html">Descargar PDF</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+  
+    <!-- Modal for Charts -->
+    <div class="modal fade" id="chartsModal" tabindex="-1" aria-labelledby="chartsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content pb-5">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chartsModalLabel">Información General</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Charts Container -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Alumnos por Tutoría</h5>
+                                        <canvas id="chartAlumnosPorTutoria"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Detalle por Tutor</h5>
+                                        <div class="form-group">
+                                            <label for="selectTutor">Seleccione Tutor:</label>
+                                            <select id="selectTutor" class="form-control">
+                                                <option value="">Todos los Tutores</option>
+                                                <!-- Tutor options will be dynamically filled here -->
+                                            </select>
+                                        </div>
+                                        <canvas id="chartAlumnosPorTutor"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Se mostrara un saludo tipo, hola $usuario, aqui tienes tus controles de administrador -->
+    <div class="container mt-4">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">¡Bienvenido!</h4>
+            <p>Hola administrador, aquí tienes tus controles de administrador.</p>
+            <hr>
+            <p class="mb-0">Recuerda que puedes gestionar a los alumnos, ver estadísticas y más.
+                <button type="button" class="btn btn-primary btn-sm ml-2" onclick="this.parentElement.parentElement.style.display='none'">Ocultar mensaje</button>
+            </p>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4">
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h4 class="mb-0">Gestión de Alumnos</h4>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#chartsModal">General</button>
+            </div>            
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <button class="btn btn-success w-100" data-toggle="modal" data-target="#addStudentModal">Añadir</button>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <button class="btn btn-info w-100" data-toggle="collapse" data-target="#advancedFilters">Filtros</button>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <label class="mr-2 mb-0" for="orderSelect">Ordenar por:</label>
+                            <select class="form-control" id="orderSelect" style="width: 60%;">
+                                <option value="asc">Ascendente</option>
+                                <option value="desc">Descendente</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="collapse" id="advancedFilters">
+                    <div class="card card-body mt-3">
+                        <form id="advancedFiltersForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputNombre">Nombre</label>
+                                        <input type="text" class="form-control" id="inputNombre" name="nombre" placeholder="Nombre del alumno">
+                                        <small class="form-text text-muted">Ingrese el nombre completo o parte del mismo.</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputBoleta">Boleta</label>
+                                        <input type="text" class="form-control" id="inputBoleta" name="boleta" placeholder="Número de boleta">
+                                        <small class="form-text text-muted">Ingrese el número de boleta del alumno.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="selectTutorFilter">Tutor</label>
+                                        <select id="selectTutorFilter" name="tutor" class="form-control">
+                                            <option selected>Seleccione un tutor...</option>
+                                        </select>
+                                        <small class="form-text text-muted">Seleccione un tutor de la lista.</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="selectTutoria">Tutoría</label>
+                                        <select id="selectTutoria" name="tutoria" class="form-control">
+                                            <option selected>Seleccione una tutoría...</option>
+                                        </select>
+                                        <small class="form-text text-muted">Seleccione el tipo de tutoría.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="selectSemestre">Semestre</label>
+                                        <input type="number" class="form-control" id="selectSemestre" name="semestre" min="1" max="10">
+                                        <small class="form-text text-muted">Seleccione el semestre actual del alumno.</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="selectCarrera">Carrera</label>
+                                        <select id="selectCarrera" name="carrera" class="form-control">
+                                            <option selected>Seleccione una carrera...</option>
+                                            <option value="Ingeniería en Sistemas Computacionales">Ingeniería en Sistemas Computacionales</option>
+                                            <option value="Ingeniería en Inteligencia Artificial">Ingeniería en Inteligencia Artificial</option>
+                                            <option value="Licenciatura en Ciencia De Datos">Licenciatura en Ciencia De Datos</option>
+                                        </select>
+                                        <small class="form-text text-muted">Seleccione la carrera del alumno.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="reset" class="btn btn-secondary">Limpiar Filtros</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>              
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="tablaAlumnos">
+                        <thead>
+                            <tr>
+                                <th>Boleta</th>
+                                <th>Nombre</th>
+                                <th>Carrera</th>
+                                <th>Tutor</th>
+                                <th>Tutoría</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Alumnos will be dynamically filled here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addStudentModalLabel">Añadir Alumno</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="registroForm">
+                        <fieldset class="border p-3 rounded">
+                            <legend class="w-auto">Datos personales y académicos</legend>
+                            <div class="form-row">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre:</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off" required>
+                                        <small id="nombreHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="primer_apellido">Primer Apellido:</label>
+                                        <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" autocomplete="off" required>
+                                        <small id="primerApellidoHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="segundo_apellido">Segundo Apellido:</label>
+                                        <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" autocomplete="off" required>
+                                        <small id="segundoApellidoHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="boleta">Boleta:</label>
+                                        <input type="text" class="form-control" id="boleta" name="boleta" autocomplete="off" required>
+                                        <small id="boletaHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="telefono">Teléfono:</label>
+                                        <input type="tel" class="form-control" id="telefono" name="telefono" autocomplete="off" required>
+                                        <small id="telefonoHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="semestre">Semestre:</label>
+                                        <input type="number" class="form-control" id="semestre" name="semestre" min="1" max="10" autocomplete="off" required>
+                                        <small id="semestreHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="carrera">Carrera que cursa:</label>
+                                    <select class="form-control" id="carrera" name="carrera" autocomplete="off" required>
+                                        <option value="">Selecciona...</option>
+                                        <option value="Ingeniería en Sistemas Computacionales">Ingeniería en Sistemas Computacionales</option>
+                                        <option value="Ingeniería en Inteligencia Artificial">Ingeniería en Inteligencia Artificial</option>
+                                        <option value="Licenciatura en Ciencia De Datos">Licenciatura en Ciencia De Datos</option>
+                                    </select>
+                                    <small id="carreraHelp" class="form-text text-muted"></small>
+                                </div>
+                                <div class="form-group col-md-6 px-3">
+                                    <label>Prefieres que tu tutor sea:</label>
+                                    <div class="form-check" id="hombre-div">
+                                        <input class="form-check-input" type="radio" name="preferencia_tutor" id="hombre" value="Hombre" autocomplete="off" required>
+                                        <label class="form-check-label" for="hombre">Hombre</label>
+                                    </div>
+                                    <div class="form-check" id="mujer-div">
+                                        <input class="form-check-input" type="radio" name="preferencia_tutor" id="mujer" value="Mujer" autocomplete="off" required>
+                                        <label class="form-check-label" for="mujer">Mujer</label>
+                                    </div>
+                                    <small id="tipoTutorHelp" class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="tutoria">Tipo de Tutoría:</label>
+                                        <select class="form-control" id="tutoria" name="tutoria" required>
+                                            <option value="" onchange="cargarTutores()">Selecciona una tutoría...</option>
+                                        </select>
+                                        <small id="tutoriaHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="tutor">Tutor:</label>
+                                        <select class="form-control" id="tutor" name="tutor" required>
+                                            <option value="">Selecciona un tutor...</option>
+                                        </select>
+                                        <small id="tutorHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+            
+                        <fieldset class="border p-3 rounded">
+                            <legend class="w-auto">Cuenta</legend>      
+                            <div class="form-row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="correo_institucional">Correo Electrónico Institucional:</label>
+                                        <input type="email" class="form-control" id="correo_institucional" name="correo_institucional" autocomplete="off" required>
+                                        <small id="correoHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="contrasena">Contraseña:</label>
+                                        <input type="password" class="form-control" id="contrasena" name="contrasena" autocomplete="off" required>
+                                        <small id="contrasenaHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitButton">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="updateStudentModal" tabindex="-1" role="dialog" aria-labelledby="updateStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateStudentModalLabel">Actualizar Alumno</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateForm">
+                        <fieldset class="border p-3 rounded">
+                            <legend class="w-auto">Datos personales y académicos</legend>
+                            <div class="form-row">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="updateNombre">Nombre:</label>
+                                        <input type="text" class="form-control" id="updateNombre" name="nombre" autocomplete="off" required>
+                                        <small id="updateNombreHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="updatePrimerApellido">Primer Apellido:</label>
+                                        <input type="text" class="form-control" id="updatePrimerApellido" name="primer_apellido" autocomplete="off" required>
+                                        <small id="updatePrimerApellidoHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="updateSegundoApellido">Segundo Apellido:</label>
+                                        <input type="text" class="form-control" id="updateSegundoApellido" name="segundo_apellido" autocomplete="off" required>
+                                        <small id="updateSegundoApellidoHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="updateBoleta">Boleta:</label>
+                                        <input type="text" class="form-control" id="updateBoleta" name="boleta" autocomplete="off" required readonly>
+                                        <small id="updateBoletaHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="updateTelefono">Teléfono:</label>
+                                        <input type="tel" class="form-control" id="updateTelefono" name="telefono" autocomplete="off" required>
+                                        <small id="updateTelefonoHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="updateSemestre">Semestre:</label>
+                                        <input type="number" class="form-control" id="updateSemestre" name="semestre" min="1" max="10" autocomplete="off" required>
+                                        <small id="updateSemestreHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="updateCarrera">Carrera que cursa:</label>
+                                    <select class="form-control" id="updateCarrera" name="carrera" autocomplete="off" required>
+                                        <option value="">Selecciona...</option>
+                                        <option value="Ingeniería en Sistemas Computacionales">Ingeniería en Sistemas Computacionales</option>
+                                        <option value="Ingeniería en Inteligencia Artificial">Ingeniería en Inteligencia Artificial</option>
+                                        <option value="Licenciatura en Ciencia De Datos">Licenciatura en Ciencia De Datos</option>
+                                    </select>
+                                    <small id="updateCarreraHelp" class="form-text text-muted"></small>
+                                </div>
+                                <div class="form-group col-md-6 px-3">
+                                    <label>Prefieres que tu tutor sea:</label>
+                                    <div class="form-check" id="updateHombre-div">
+                                        <input class="form-check-input" type="radio" name="preferencia_tutor" id="updateHombre" value="Hombre" autocomplete="off" required>
+                                        <label class="form-check-label" for="updateHombre">Hombre</label>
+                                    </div>
+                                    <div class="form-check" id="updateMujer-div">
+                                        <input class="form-check-input" type="radio" name="preferencia_tutor" id="updateMujer" value="Mujer" autocomplete="off" required>
+                                        <label class="form-check-label" for="updateMujer">Mujer</label>
+                                    </div>
+                                    <small id="updateTipoTutorHelp" class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="updateTutoria">Tipo de Tutoría:</label>
+                                        <select class="form-control" id="updateTutoria" name="tutoria" required>
+                                            <option value="" onchange="cargarTutores()">Selecciona una tutoría...</option>
+                                        </select>
+                                        <small id="updateTutoriaHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="updateTutor">Tutor:</label>
+                                        <select class="form-control" id="updateTutor" name="tutor" required>
+                                            <option value="">Selecciona un tutor...</option>
+                                        </select>
+                                        <small id="updateTutorHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+    
+                        <fieldset class="border p-3 rounded">
+                            <legend class="w-auto">Cuenta</legend>      
+                            <div class="form-row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="updateCorreoInstitucional">Correo Electrónico Institucional:</label>
+                                        <input type="email" class="form-control" id="updateCorreoInstitucional" name="correo_institucional" autocomplete="off" required>
+                                        <small id="updateCorreoHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="updateContrasena">Contraseña:</label>
+                                        <input type="password" class="form-control" id="updateContrasena" name="contrasena" autocomplete="off" required>
+                                        <small id="updateContrasenaHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="updateButton">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer id="footer" style="background-color:#EAEAEA !important; margin-top: 50px;" class="pt-2">
+        <div id="pie">
+            <!-- Primera Section -->
+            <div class="footer-widgets-wrap py-5" style="background-color: #333333;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <a href="https://www.gob.mx/sep" title="SEP" target="_blank">
+                            <img src="imgs/logoSEP.png" alt="Logo de la SEP" style="max-width: 100%; height: auto;" class="mb-4"></a><br>
+                            <a href="https://www.gob.mx/sep" style="color:#FFF !important;" title="SEP" target="_blank">www.gob.mx/SEP/</a>
+                        </div>
+                        <div class="col-md-8 text-center">
+                            <h4 style="color:#FFF !important; font-size: 1em;">
+                                INSTITUTO POLITÉCNICO NACIONAL<br>
+                                D.R. Instituto Politécnico Nacional (IPN). Av. Luis Enrique Erro S/N, Unidad Profesional Adolfo López Mateos, Zacatenco, Delegación Gustavo A. Madero, C.P. 07738, Ciudad de México 2009-2013.<br><br>
+                                Esta página es una obra intelectual protegida por la Ley Federal del Derecho de Autor, puede ser reproducida con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica; su uso para otros fines, requiere autorización previa y por escrito de la Dirección General del Instituto.
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Segunda Seccion -->
+            <div class="footer-widgets-wrap py-5" style="background-color: #13322B;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <a href="https://www.gob.mx" title="SEP" target="_blank">
+                                <img src="imgs/gobmxlogo_2x.png" alt="Logo del Gobierno de México" style="max-width: 100%; height: auto;" class="mb-4">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 style="color:#FFF !important;">Enlaces</h4>
+                            <p>
+                                <a href="https://participa.gob.mx/" title="Participa" style="color:#CDCDCD;">Participa</a><br>
+                                <a href="https://www.gob.mx/publicaciones" title="Publicaciones Oficiales" style="color:#CDCDCD;">Publicaciones Oficiales</a><br>
+                                <a href="http://www.ordenjuridico.gob.mx/" title="Marco Jurídico" style="color:#CDCDCD;">Marco Jurídico</a><br>
+                                <a href="https://consultapublicamx.inai.org.mx/vut-web/" title="Plataforma Nacional de Transparencia" style="color:#CDCDCD;">Plataforma Nacional de Transparencia</a><br>
+                                <a href="https://alertadores.funcionpublica.gob.mx/" title="Alerta" style="color:#CDCDCD;">Alerta</a><br>
+                                <a href="https://sidec.funcionpublica.gob.mx/" title="Denuncia" style="color:#CDCDCD;">Denuncia</a>
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 style="color:#FFF !important;">¿Qué es gob.mx?</h4>
+                            <p style="color:#FFF !important;">
+                                Es el portal único de trámites, información y participación ciudadana 
+                                <span><a href="https://www.gob.mx/que-es-gobmx" title="Portal único de trámites" style="color:#CDCDCD;">Leer más</a></span><br><br>
+                                <a href="https://datos.gob.mx/" title="Portal de datos abiertos" style="color:#CDCDCD;">Portal de datos abiertos</a><br>
+                                <a href="https://www.gob.mx/accesibilidad" title="Declaración de accesibilidad" style="color:#CDCDCD;">Declaración de accesibilidad</a><br>
+                                <a href="https://www.gob.mx/privacidadintegral" title="Aviso de privacidad integral" style="color:#CDCDCD;">Aviso de privacidad integral</a><br>
+                                <a href="https://www.gob.mx/privacidadsimplificado" title="Aviso de privacidad simplificado" style="color:#CDCDCD;">Aviso de privacidad simplificado</a><br>
+                                <a href="https://www.gob.mx/terminos" title="Términos y condiciones" style="color:#CDCDCD;">Términos y condiciones</a><br>
+                                <a href="https://www.gob.mx/terminos#medidas-seguridad-informacion" title="Política de seguridad" style="color:#CDCDCD;">Política de seguridad</a><br>
+                                <a href="https://www.gob.mx/sitemap" title="Mapa de sitio" style="color:#CDCDCD;">Mapa de sitio</a><br>
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <a href="https://www.gob.mx/tramites/ficha/presentacion-de-quejas-y-denuncias-en-la-sfp/SFP54" title="Denuncia contra servidores" style="color:#CDCDCD;">Denuncia contra servidores públicos</a>
+                            <p></p>
+                            <h4 style="color:#FFF !important;">Síguenos en:</h4>
+                            <p>
+                                <a href="https://www.facebook.com/gobmexico" style="color:#CDCDCD;"><i class="fab fa-facebook-f fa-2x"></i></a>&nbsp;<br>
+                                <a href="https://twitter.com/GobiernoMX" style="color:#CDCDCD;"><i class="fab fa-twitter fa-2x"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/popper.min.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/estadisticas.js"></script>
+    <script src="js/create.js"></script>
+    <script src="js/read.js"></script>
+    <script src="js/update.js"></script>
+    <script src="js/delete.js"></script>
+    <script src="js/sessionAdmin.js "></script>
+</body>
+</html>

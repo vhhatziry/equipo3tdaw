@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro al Programa de Tutorías - ESCOM</title>
+    <!-- Enlace a los estilos CSS de Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link a font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+    <!-- Enlace a la hoja de estilos personalizada -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="resources/icons/icono.ico" type="image/icon type">
+</head>
+<body style="background-image: url('resources/img/pdf.png'); background-size: 50%; background-position: center; background-repeat:repeat;" >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="https://www.ipn.mx/" target="_blank">
+            <img src="resources/img/logoIPN2x.png" alt="IPN" style="height: 70px; margin-left: -0.5rem;" class="d-inline-block align-top">
+        </a>
+        <a class="navbar-brand" href="https://www.escom.ipn.mx/" target="_blank">
+            <img src="resources/img/logoESCOM2x.png" alt="ESCOM" style="height: 70px;  margin-left: -2rem;" class="d-inline-block align-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto"> <!-- Utilizando ml-auto para alinear a la derecha -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="registro.html">Registro</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Descargar PDF</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cradmin.html">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Pedir credenciales para descargar el PDF, cooreo institucional y contrasenia -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center">
+                        <legend>Descargar PDF</legend>
+                    </div>
+                    <div class="card-body">
+                        <div id="mensaje" class="alert alert-danger d-none"></div>
+                        <p class="text-center pls">Por favor ingrese sus credenciales para descargar el PDF con los datos de su registro.</p>
+                        <form id="descargarPDFForm">
+                            <div class="form-group">
+                                <label for="boleta">Boleta</label>
+                                <input type="text" class="form-control" id="boleta" name="boleta" placeholder="Ingrese su boleta" autocomplete="off" required>
+                                <small id="boletaHelp" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="correo_institucional">Correo institucional</label>
+                                <input type="email" class="form-control" id="correo_institucional" name="correo_institucional" placeholder="Ingrese su correo institucional" autocomplete="off" required>
+                                <small id="correoHelp" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="contrasena">Contraseña</label>
+                                <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" autocomplete="new-password" required>
+                                <small id="contrasenaHelp" class="form-text text-muted"></small>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Descargar PDF</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" style="background-color:#EAEAEA !important; margin-top: 50px;" class="pt-2">
+        <div id="pie">
+            <!-- Primera Section -->
+            <div class="footer-widgets-wrap py-5" style="background-color: #333333;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <a href="https://www.gob.mx/sep" title="SEP" target="_blank">
+                            <img src="imgs/logoSEP.png" alt="Logo de la SEP" style="max-width: 100%; height: auto;" class="mb-4"></a><br>
+                            <a href="https://www.gob.mx/sep" style="color:#FFF !important;" title="SEP" target="_blank">www.gob.mx/SEP/</a>
+                        </div>
+                        <div class="col-md-8 text-center">
+                            <h4 style="color:#FFF !important; font-size: 1em;">
+                                INSTITUTO POLITÉCNICO NACIONAL<br>
+                                D.R. Instituto Politécnico Nacional (IPN). Av. Luis Enrique Erro S/N, Unidad Profesional Adolfo López Mateos, Zacatenco, Delegación Gustavo A. Madero, C.P. 07738, Ciudad de México 2009-2013.<br><br>
+                                Esta página es una obra intelectual protegida por la Ley Federal del Derecho de Autor, puede ser reproducida con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica; su uso para otros fines, requiere autorización previa y por escrito de la Dirección General del Instituto.
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Segunda Seccion -->
+            <div class="footer-widgets-wrap py-5" style="background-color: #13322B;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <a href="https://www.gob.mx" title="SEP" target="_blank">
+                                <img src="imgs/gobmxlogo_2x.png" alt="Logo del Gobierno de México" style="max-width: 100%; height: auto;" class="mb-4">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 style="color:#FFF !important;">Enlaces</h4>
+                            <p>
+                                <a href="https://participa.gob.mx/" title="Participa" style="color:#CDCDCD;">Participa</a><br>
+                                <a href="https://www.gob.mx/publicaciones" title="Publicaciones Oficiales" style="color:#CDCDCD;">Publicaciones Oficiales</a><br>
+                                <a href="http://www.ordenjuridico.gob.mx/" title="Marco Jurídico" style="color:#CDCDCD;">Marco Jurídico</a><br>
+                                <a href="https://consultapublicamx.inai.org.mx/vut-web/" title="Plataforma Nacional de Transparencia" style="color:#CDCDCD;">Plataforma Nacional de Transparencia</a><br>
+                                <a href="https://alertadores.funcionpublica.gob.mx/" title="Alerta" style="color:#CDCDCD;">Alerta</a><br>
+                                <a href="https://sidec.funcionpublica.gob.mx/" title="Denuncia" style="color:#CDCDCD;">Denuncia</a>
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 style="color:#FFF !important;">¿Qué es gob.mx?</h4>
+                            <p style="color:#FFF !important;">
+                                Es el portal único de trámites, información y participación ciudadana 
+                                <span><a href="https://www.gob.mx/que-es-gobmx" title="Portal único de trámites" style="color:#CDCDCD;">Leer más</a></span><br><br>
+                                <a href="https://datos.gob.mx/" title="Portal de datos abiertos" style="color:#CDCDCD;">Portal de datos abiertos</a><br>
+                                <a href="https://www.gob.mx/accesibilidad" title="Declaración de accesibilidad" style="color:#CDCDCD;">Declaración de accesibilidad</a><br>
+                                <a href="https://www.gob.mx/privacidadintegral" title="Aviso de privacidad integral" style="color:#CDCDCD;">Aviso de privacidad integral</a><br>
+                                <a href="https://www.gob.mx/privacidadsimplificado" title="Aviso de privacidad simplificado" style="color:#CDCDCD;">Aviso de privacidad simplificado</a><br>
+                                <a href="https://www.gob.mx/terminos" title="Términos y condiciones" style="color:#CDCDCD;">Términos y condiciones</a><br>
+                                <a href="https://www.gob.mx/terminos#medidas-seguridad-informacion" title="Política de seguridad" style="color:#CDCDCD;">Política de seguridad</a><br>
+                                <a href="https://www.gob.mx/sitemap" title="Mapa de sitio" style="color:#CDCDCD;">Mapa de sitio</a><br>
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <a href="https://www.gob.mx/tramites/ficha/presentacion-de-quejas-y-denuncias-en-la-sfp/SFP54" title="Denuncia contra servidores" style="color:#CDCDCD;">Denuncia contra servidores públicos</a>
+                            <p></p>
+                            <h4 style="color:#FFF !important;">Síguenos en:</h4>
+                            <p>
+                                <a href="https://www.facebook.com/gobmexico" style="color:#CDCDCD;"><i class="fab fa-facebook-f fa-2x"></i></a>&nbsp;<br>
+                                <a href="https://twitter.com/GobiernoMX" style="color:#CDCDCD;"><i class="fab fa-twitter fa-2x"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Script de validación con JavaScript -->
+    <script src="js/validation.js"></script>
+    <script src="js/descargarPDFHandler.js"></script>
+    <script src="js/cerrarSesion.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro al Programa de Tutorías - ESCOM</title>
+    <!-- Enlace a los estilos CSS de Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- Enlace a la hoja de estilos personalizada -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="d-flex">
+            <a class="navbar-brand" href="https://www.ipn.mx/" target="_blank">
+                <img src="resources/img/logo_ipn.png" alt="IPN" style="height: 60px;" class="d-inline-block align-top">
+            </a>
+            <a class="navbar-brand" href="https://www.escom.ipn.mx/" target="_blank">
+                <img src="resources/img/logo_escom.png" alt="ESCOM" style="height: 60px;" class="d-inline-block align-top">
+            </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="registro.html">Registro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sesion.html">Descargar PDF</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="php/admin.php">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container py-3">
+        <h1 class="rpt">Registro al Programa de Tutorías</h1>
+        
+        <form id="registroForm" action="php/conexionBaseDatos.php" method="POST" target="_blank">
+            <!-- Datos personales y académicos -->
+            <!-- Fieldset con clase de bootstrap para mostrar el borde -->
+            <fieldset class="border p-3 rounded">
+                <legend class="w-auto">Datos personales y académicos</legend>
+                <div class="form-row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" oninput="validarNombre()" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="primer_apellido">Primer Apellido:</label>
+                            <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" oninput="validarPrimerApellido()" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="segundo_apellido">Segundo Apellido:</label>
+                            <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" oninput="validarSegundoApellido()" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="boleta">Boleta:</label>
+                            <input type="text" class="form-control" id="boleta" name="boleta" oninput="validarBoleta()" autocomplete="off" required>
+                            <div id="errorBoleta" class="alert alert-danger mt-2 d-none"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" class="form-control" id="telefono" name="telefono" oninput="validarTelefono()" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="semestre">Semestre:</label>
+                            <input type="number" class="form-control" id="semestre" name="semestre" min="1" max="10" oninput="validarSemestre()" autocomplete="off" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="carrera">Carrera que cursa:</label>
+                        <select class="form-control" id="carrera" name="carrera" oninput="validarCarrera()" autocomplete="off" required>
+                            <option value="">Selecciona...</option>
+                            <option value="Ingeniería en Sistemas Computacionales">Ingeniería en Sistemas Computacionales</option>
+                            <option value="Ingeniería en Inteligencia Artificial">Ingeniería en Inteligencia Artificial</option>
+                            <option value="Licenciatura en Ciencia De Datos">Licenciatura en Ciencia De Datos</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6 px-3">
+                        <label>Prefieres que tu tutor sea:</label>
+                        <div class="form-check" id="hombre-div">
+                            <input class="form-check-input" type="radio" name="preferencia_tutor" id="hombre" value="hombre" onchange="validarTipoTutor()" autocomplete="off" required>
+                            <label class="form-check-label" for="hombre">Hombre</label>
+                        </div>
+                        <div class="form-check" id="mujer-div">
+                            <input class="form-check-input" type="radio" name="preferencia_tutor" id="mujer" value="mujer" onchange="validarTipoTutor()" autocomplete="off" required>
+                            <label class="form-check-label" for="mujer">Mujer</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Datos de la cuenta -->
+            <fieldset class="border p-3 rounded">
+                <legend class="w-auto">Cuenta</legend>      
+                <div class="form-row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="correo_institucional">Correo Electrónico Institucional:</label>
+                            <input type="email" class="form-control" id="correo_institucional" name="correo_institucional" oninput="validarCorreo()" autocomplete="off" required>
+                            <div id="errorEmail" class="alert alert-danger mt-2 d-none"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="contrasena">Contraseña:</label>
+                            <input type="password" class="form-control" id="contrasena" name="contrasena" autocomplete="off" onchange="validarContra()" required>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row mt-3">
+                <div class="col-lg-6 col-12 mb-3 mb-lg-0">
+                    <button type="submit" class="btn btn-primary w-100 rgt" ">Registrar</button>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <button type="reset" class="btn btn-secondary w-100 lmp" onclick="bordeOriginal()">Limpiar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    
+    
+    <!-- Scripts de Bootstrap y jQuery -->
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Script de validación con JavaScript -->
+    <script src="js/validation.js"></script>
+</body>
+</html>
